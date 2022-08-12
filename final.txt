@@ -1,0 +1,43 @@
+TITLE: 
+Ian Marchbank | CSCI 261 Section C | 'Sudoku Solver'
+
+PROBLEM DESCRIPTION: 
+Sudoku puzzles are a common pastime enjoyed by many, including myself. But, often the odds are stacked against common people like myself. Some mathematicians develop puzzles for years and make them impossibly difficult. These puzzles can be solved but they are simply too difficult for the average person. Or maybe you simply want to check your work from todays paper before tomorrow morning. That is why I want to make a program that can quickly solve any classic 9x9 sudoku puzzle that is able to be solved. This program will take user input in the form of a file, solve the puzzle (or determine if it is impossible/invalid), and output the answer to the terminal for the user to view.
+
+PROGRAM DOCUMENTATION: 
+To run this program the user will need to create a '.txt' file that has 81 characters/integers in total. There will be a 9x9 grid of integers '0-9' in the '.txt' file Like so...
+"
+000000000
+000000000
+000000000
+000000000
+000000000
+000000000
+000000000
+000000000
+000000000
+"
+This makes up our classic 9x9 sudoku puzzle. A '0' represents a blank space and a '1-9' represents a known sudoku value in the puzzle. The user will then simply need to run the program and input the filename as instructed by the program OR the user can input the filename to the terminal before the program is even run like so... './FP test_cases/sudoku1.txt' (filename and pathing is up to the user to determine).
+
+This program could be extended to include a 'hint' and 'check' feature. The user would be asked at the beginning of the program after inputting the file name if they want to 'solve the puzzle', 'get a hint', or 'check a space'. The first option would function as the program currently functions. The 'hint' feature would offer the user the answer to a random spaces number and continue to offer hints until the user chooses to exit the program. It would get a random row and column and giving the value at that location back to the user. The 'check' feature would allow the user to input a row and column and get the corresponding number that is meant to be in that space, the user can use that information to determine if they were right or wrong. The program will continue to offer checking until the user chooses to exit the program. Alternatively it could offer the user all three options after every execution and exit only if the user chooses to do so by choosing 'quit' or by choosing to have the program solve the puzzle. The program could also be extended to offer a file output instead of a terminal output solution. I would use an ostream to accomplish this and store my solved array in this output file.
+
+DATA STRUCTURE: 
+I chose to use a 2 dimensional array since it mimics the structure of a sudoku puzzle perfectly. The structure of a sudoku puzzles already in the form of a grid and the spots can be validated using this structure. By using a 2 dimensional array I am able to validate the spaces easily and efficiently as the locations can be tracked using the indices of the array. For example if I want to check if a row and column are safe for a certain number I would be able to iterate through the row and see if the value I am testing for already exists and then iterate through the column to see if the value already exists. If it does the program can move on and test another value or if it does not exist it can place the value at that space.
+
+TESTS:
+(All tests in a 'test_cases' folder for your convenience)
+1.) Normal sudoku puzzle
+- This test case DOES have a smart user. They submitted a properly formatted 9x9 text file with integers 0-9. The program will enter the program and run normally when this file is opened. It will then solve and print the sudoku puzzle so the user can see the result.
+2.) Extremely difficult sudoku puzzle
+- This test case also DOES have a smart user. They submitted a properly formatted 9x9 text file with integers 0-9. But not just any puzzle. This is the most difficult sudoku puzzle known to man kind and was developed by a mathematician for over 7 years. Despite this the algorithm does not fail and the program is still able to run smoothly and solve the corresponding sudoku puzzle.
+3.) Blank/solved sudoku puzzle
+- This test case DOES NOT have a smart user. They submitted a blank 9x9 grid of only 0's. Technically this can be solved and the program will print the most basic answer in the form of 123456789 etc.
+4.) Invalid sudoku puzzle
+- This test case also DOES NOT have a smart user. They submitted a grid that is unable to be solved because the numbers already present in the grid are invalid ie 1111111 etc. In this case the program will realize the puzzle is invalid and the program will exit informing the user that this puzzle is impossible to solve.
+5.) Invalid sudoku file
+- This test case also DOES NOT have a smart user. They submitted a file that is unable to be solved because the file is improperly formatted ie ABCDEFG etc. In this case the program will realize there are non integers or that the file is not formatted correctly and the program will exit informing the user that the file is invalid and impossible to solve.
+6.) Already solved
+- This test case also DOES NOT have a smart user. They submitted a file that has already been solved. In this case the program will simply output the same puzzle back to the user as it has already accomplished its task.
+
+REFLECTIONS: 
+I learned a lot from this project. The program itself was not super difficult to create, it was the cases where I would encounter a non smart user that gave me difficulty. When creating the pseudocode for this project I had not done A6 or and of the A6 labs. If I had I could have used a stack or queue to track the empty spaces and figure out whether the file was valid (test case 4) or not by exiting the program once the stack was empty whether it was solved or not. Instead having not learned about this I made a function that checks if each space is valid before the program begins to solve it. I think this was is relatively efficient in this case since I am only running through the loop 81 times each, but in the larger cases this could be less efficient. Ultimately it works for my project and I was going to go back and change it but realized something else about computer science/programming: everything is a case by case basis. It is not necessarily bad to implement a simple algorithm that is easier to implement and understand when you are only running through a very very small number of loops/iterations. I also learned about recursion and reiterated what I had learned in the "towers of Hanoi lab". Recursion is very powerful and my program makes use of this in my "solve" function. When my program goes down a bad path ie putting a 1 instead of a 2 it is able to back trace to that point and try all the options before it ultimately finds the correct or a correct solution to the puzzle (sometimes there are multiple correct solutions on special puzzles). If I could go back I would definitely make this more of a dynamic program with more user interaction. I would've liked to implement the ideas I listed in the "program description". Unfortunately, I only thought of those additional ideas when writing this paper and am unable to implement them at this time (studying for finals etc). Ultimately I am proud of what I was able to do but can't wait to do more next semester as well and expand my ideas and programs to do much much more.
